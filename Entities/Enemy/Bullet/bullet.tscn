@@ -1,0 +1,85 @@
+[gd_scene load_steps=15 format=3 uid="uid://binv4m3v2p7yj"]
+
+[ext_resource type="Texture2D" uid="uid://s03tb8ra4kgd" path="res://working/debug_bullet.png" id="1_8geso"]
+[ext_resource type="Script" path="res://Entities/Enemy/Bullet/bullet.gd" id="1_12evb"]
+[ext_resource type="Texture2D" uid="uid://whgpujr4c4qm" path="res://working/full.png" id="3_5ysto"]
+[ext_resource type="PackedScene" uid="uid://bb4smu5vslgkx" path="res://explosion.tscn" id="4_aw1xp"]
+
+[sub_resource type="Curve" id="Curve_yu8pt"]
+_data = [Vector2(0, 0.486792), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oiv2q"]
+curve = SubResource("Curve_yu8pt")
+
+[sub_resource type="Gradient" id="Gradient_602xx"]
+colors = PackedColorArray(1, 1, 1, 1, 0.169245, 0.169245, 0.169245, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pjha1"]
+gradient = SubResource("Gradient_602xx")
+
+[sub_resource type="Curve" id="Curve_hgujs"]
+max_value = 3.0
+_data = [Vector2(0, 1.09811), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_up5q8"]
+curve = SubResource("Curve_hgujs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i4uvc"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.01
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 5.62
+linear_accel_max = 24.72
+radial_accel_min = 4.13
+radial_accel_max = 15.72
+tangential_accel_min = 3.37
+tangential_accel_max = 25.85
+scale_curve = SubResource("CurveTexture_up5q8")
+color_ramp = SubResource("GradientTexture1D_pjha1")
+alpha_curve = SubResource("CurveTexture_oiv2q")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soglc"]
+atlas = ExtResource("3_5ysto")
+region = Rect2(52, 19, 5, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fb26g"]
+size = Vector2(12.9488, 7.01572)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vi4w"]
+size = Vector2(0.927034, 2.98513)
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_12evb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8geso")
+
+[node name="CPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -2
+position = Vector2(-7.34162, 0)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_i4uvc")
+texture = SubResource("AtlasTexture_soglc")
+lifetime = 2.0
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(-1.00452, 0.0223236)
+shape = SubResource("RectangleShape2D_fb26g")
+
+[node name="Nose" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="Nose" type="CollisionShape2D" parent="Nose"]
+position = Vector2(7.02366, 0.00743103)
+shape = SubResource("RectangleShape2D_5vi4w")
+
+[node name="Explosion" parent="." instance=ExtResource("4_aw1xp")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Nose" to="." method="_on_nose_body_entered"]

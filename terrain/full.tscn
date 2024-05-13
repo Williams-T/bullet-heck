@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp21haf1aiv4i"]
+
+[ext_resource type="Texture2D" uid="uid://whgpujr4c4qm" path="res://working/full.png" id="1_51aro"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dqes"]
+atlas = ExtResource("1_51aro")
+region = Rect2(22, 18, 11, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhlok"]
+size = Vector2(11.0034, 10.9223)
+
+[node name="full" type="Sprite2D"]
+texture = SubResource("AtlasTexture_6dqes")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.001688, 0.0378861)
+shape = SubResource("RectangleShape2D_bhlok")
+debug_color = Color(0.764706, 0, 0, 0.419608)

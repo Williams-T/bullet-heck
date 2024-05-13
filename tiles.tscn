@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8veor5rwwf5x"]
+
+[ext_resource type="PackedScene" uid="uid://cp21haf1aiv4i" path="res://terrain/full.tscn" id="1_ucr46"]
+[ext_resource type="PackedScene" uid="uid://cp3uc2id2cjht" path="res://terrain/up_right.tscn" id="2_33eox"]
+[ext_resource type="PackedScene" uid="uid://wb8db7oefkf3" path="res://terrain/up_left.tscn" id="3_kq5mw"]
+[ext_resource type="PackedScene" uid="uid://b45idqekpbhlf" path="res://terrain/down_right.tscn" id="4_rnva2"]
+[ext_resource type="PackedScene" uid="uid://qxklqei2dwcw" path="res://terrain/down_left.tscn" id="5_wydq0"]
+
+[node name="Node2D" type="Node2D"]
+texture_filter = 1
+
+[node name="full" parent="." instance=ExtResource("1_ucr46")]
+
+[node name="upRight" parent="." instance=ExtResource("2_33eox")]
+
+[node name="upLeft" parent="." instance=ExtResource("3_kq5mw")]
+visible = false
+
+[node name="downRight" parent="." instance=ExtResource("4_rnva2")]
+visible = false
+
+[node name="downLeft" parent="." instance=ExtResource("5_wydq0")]
+visible = false

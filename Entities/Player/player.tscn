@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://doxu8x7whoaaf"]
+
+[ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_lagiw"]
+[ext_resource type="Texture2D" uid="uid://whgpujr4c4qm" path="res://working/full.png" id="2_afuly"]
+[ext_resource type="Script" path="res://Entities/Player/grounded.gd" id="3_um6nc"]
+[ext_resource type="Script" path="res://Entities/Player/airborne.gd" id="4_r5776"]
+[ext_resource type="Script" path="res://Entities/Player/piloting.gd" id="5_csxe7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tikgv"]
+atlas = ExtResource("2_afuly")
+region = Rect2(52, 19, 5, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vykop"]
+radius = 2.48643
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 6
+script = ExtResource("1_lagiw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_tikgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vykop")
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Grounded" type="Node" parent="StateMachine"]
+script = ExtResource("3_um6nc")
+
+[node name="Airborne" type="Node" parent="StateMachine"]
+script = ExtResource("4_r5776")
+
+[node name="Piloting" type="Node" parent="StateMachine"]
+script = ExtResource("5_csxe7")
