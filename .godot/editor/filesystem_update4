@@ -2,4 +2,6 @@ res://node_2d.tscn
 res://Entities/Player/player.tscn
 res://Entities/Enemy/Bullet/bullet.tscn
 res://explosion.tscn
-res://Entities/Player/piloting.gd
+res://Entities/Enemy/Bullet/bullet.gd
+res://spawner.gd
+res://UI_Manager.gd

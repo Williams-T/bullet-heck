@@ -15,12 +15,16 @@ var grabbed = false
 @onready var explo = $Explosion
 @onready var smoke_trail = $CPUParticles2D
 @onready var sprite = $Sprite2D
+var new_shape
 
 var current_delta = 0.0
 var turn_timer = randf_range(0.05,0.5)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	explo.emitting = false
+	new_shape = (sh_tip.get_child(0) as CollisionShape2D).shape.duplicate()
+	new_shape.size = Vector2(20,20)
 	pass # Replace with function body.
 
 func set_direction(_direction, in_place = -1):
@@ -63,11 +67,14 @@ func check_player_direction():
 	
 
 func explode() -> void:
-	explo.emitting = true
-	smoke_trail.emitting = false
+	#smoke_trail.emitting = false
 	sprite.visible = false
 	speed = 0.0
-	await explo.finished
+	#new_shape.set_deferred('size', Vector2(20,20))
+	sh_tip.get_child(0).set_deferred('shape', new_shape)
+	sh_tip.position = Vector2(-5,0)
+	explo.emitting = true
+	await get_tree().create_timer(0.5).timeout
 	if grabbed:
 		Tracker.player.grabbed_entity = null
 		#Tracker.player.change_state(1)
@@ -75,26 +82,31 @@ func explode() -> void:
 	pass
 
 
-func _on_body_entered(body) -> void:
-	if body is CharacterBody2D:
-		if body.grabbing == false:
+func _on_body_entered(_body) -> void:
+	if _body is CharacterBody2D:
+		if _body.grabbing == false:
 			print("player_bumped")
 			modulate = Color.CADET_BLUE
-			body.jump_gauge = body.max_jump
-		elif body.grabbing == true:
+			_body.jump_gauge = _body.max_jump
+		elif _body.grabbing == true:
 			print("player_grabbed")
 			modulate = Color.CORNFLOWER_BLUE
-			body.grabbed_entity = self
+			_body.grabbed_entity = self
 			grabbed = true
 		pass
 	pass
 
 
 
-func _on_nose_body_entered(body) -> void:
-	if body is CharacterBody2D:
+func _on_nose_body_entered(_body) -> void:
+	if _body is CharacterBody2D:
 		print("player hit")
 		if grabbed:
 			return
-	explode()
+		if explo.emitting == false:
+			explode()
+		else:
+			_body.hit(direction, speed)
+	else:
+		explode()
 	pass # Replace with function body.

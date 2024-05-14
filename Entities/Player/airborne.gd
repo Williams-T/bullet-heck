@@ -24,7 +24,9 @@ func iterate(player : CharacterBody2D):
 		#player.velocity = player.velocity.lerp(Vector2.ZERO, 0.1)
 	if abs(player.velocity.x) < 0.05:
 		player.velocity.x = 0
-
+	#if player.last_hit != [0,0]:
+		#player.velocity += Vector2(player.last_hit[0],0).rotated(player.last_hit[1])
+		#player.last_hit = [0,0]
 	# Move the player
 	player.move_and_slide()
 	if player.is_on_floor():

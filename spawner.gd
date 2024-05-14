@@ -4,14 +4,14 @@ var bullet = preload("res://Entities/Enemy/Bullet/bullet.tscn")
 var delta_count = 0.0
 var current_angle = 0.0
 var spread = 270.0 # full spread
-var gap = 0.0
+#var _gap = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
 func spawn_pattern(quantity, homing, gap = 0.0):
-	var bullets = []
+	#var bullets = []
 	var angle_inc = (spread - gap) / float(quantity)
 	for i in range(quantity):
 		var new_bullet = spawn_bullet()

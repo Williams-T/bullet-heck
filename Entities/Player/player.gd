@@ -5,6 +5,7 @@ var jump_gauge = 50
 var max_jump = 50
 var accel = 50.0
 var decel = 100.0
+var last_hit = [0,0]
 
 var grabbed_entity = null
 
@@ -23,6 +24,9 @@ func _ready() -> void:
 	velocity = Vector2.ZERO  # Initialize velocity vector
 	Tracker.set_player(self)
 
+func hit(direction, speed):
+	last_hit = [direction, speed]
+	pass
 
 func _physics_process(_delta):
 	if grounded:
