@@ -13,10 +13,12 @@ var grounded = true
 var airborne = false
 var piloting = false
 var grabbing = false
+var blink = false
 
 @onready var st_grounded = $StateMachine/Grounded
 @onready var st_airborne = $StateMachine/Airborne
 @onready var st_piloting = $StateMachine/Piloting
+@onready var st_blink = $StateMachine/Blinking
 
 
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +37,8 @@ func _physics_process(_delta):
 		st_airborne.iterate(self)
 	elif piloting:
 		st_piloting.iterate(self)
+	elif blink:
+		st_blink.iterate(self)
 	if grabbing:
 		modulate = Color.CORAL
 	elif !grabbing and modulate != Color.WHITE:
@@ -49,6 +53,10 @@ func change_state(state_id : int):
 			airborne = true
 		2:
 			piloting = true
+		3:
+			grabbing = true
+		4:
+			blink = true
 
 func clear_states():
 	grounded = false

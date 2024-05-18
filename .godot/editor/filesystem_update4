@@ -5,3 +5,7 @@ res://explosion.tscn
 res://Entities/Enemy/Bullet/bullet.gd
 res://spawner.gd
 res://UI_Manager.gd
+res://Entities/Player/grounded.gd
+res://Entities/Player/airborne.gd
+res://Entities/Player/blinking.gd
+res://Entities/Player/player.gd

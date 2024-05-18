@@ -1,3 +1,4 @@
+Node
 GPUParticles2D
 CPUParticles2D
 Area2D
@@ -11,4 +12,3 @@ GridContainer
 CanvasLayer
 TileMap
 StaticBody2D
-Node

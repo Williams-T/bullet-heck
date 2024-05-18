@@ -1,13 +1,18 @@
 extends Node
 
+var jump_speed = 400
+
 func iterate(player : CharacterBody2D):
 	if !player.is_on_floor():
 		player.change_state(1)
 	if player.jump_gauge < player.max_jump:
 		player.jump_gauge = player.max_jump
 		UiManager.adjust_bar(1.0)
+	if Input.is_action_just_pressed("blink"):
+		player.change_state(4)
 	if Input.is_action_pressed("ui_up"):
-		player.change_state(1)
+		player.velocity += Vector2(0.0, -jump_speed)
+		#player.change_state(1)
 		# Handle horizontal movement (WASD)
 	if Input.is_action_pressed("ui_left"):
 		player.velocity = player.velocity.lerp(Vector2(-player.move_speed, 0), 0.1)

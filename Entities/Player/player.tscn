@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://doxu8x7whoaaf"]
+[gd_scene load_steps=9 format=3 uid="uid://doxu8x7whoaaf"]
 
 [ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_lagiw"]
 [ext_resource type="Texture2D" uid="uid://whgpujr4c4qm" path="res://working/full.png" id="2_afuly"]
 [ext_resource type="Script" path="res://Entities/Player/grounded.gd" id="3_um6nc"]
 [ext_resource type="Script" path="res://Entities/Player/airborne.gd" id="4_r5776"]
 [ext_resource type="Script" path="res://Entities/Player/piloting.gd" id="5_csxe7"]
+[ext_resource type="Script" path="res://Entities/Player/blinking.gd" id="6_wpqeu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tikgv"]
 atlas = ExtResource("2_afuly")
@@ -33,3 +34,6 @@ script = ExtResource("4_r5776")
 
 [node name="Piloting" type="Node" parent="StateMachine"]
 script = ExtResource("5_csxe7")
+
+[node name="Blinking" type="Node" parent="StateMachine"]
+script = ExtResource("6_wpqeu")
