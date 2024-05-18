@@ -88,6 +88,8 @@ func _on_body_entered(_body) -> void:
 			print("player_bumped")
 			modulate = Color.CADET_BLUE
 			_body.jump_gauge = _body.max_jump
+			#if _body.get_angle_to(self.position + Vector2(0, speed * 4.0).rotated(direction)) > 0.5:
+			set_direction(_body.get_angle_to(self.position + Vector2(0, speed).rotated(direction)), 0)
 		elif _body.grabbing == true:
 			print("player_grabbed")
 			modulate = Color.CORNFLOWER_BLUE
